@@ -14,16 +14,22 @@ namespace API_Users.Repositories
 
     public UserReturnModel Register(RegisterUserModel creds)
     {
-      // encrypt the password??
-      creds.Password = BCrypt.Net.BCrypt.HashPassword(creds.Password);
       //sql
       try
       {
-        string id = _db.ExecuteScalar<string>(@"
-                INSERT INTO users (Username, Email, Password)
-                VALUES (@Username, @Email, @Password);
-                SELECT LAST_INSERT_ID();
-            ", creds);
+        var sql = @"
+      INSERT INTO users (id, username, email, password)
+      VALUES (@Id, @Username, @Email, @Password);
+      ";
+        creds.Password = BCrypt.Net.BCrypt.HashPassword(creds.Password);
+        var id = Guid.NewGuid().ToString();
+        _db.ExecuteScalar<string>(sql, new
+        {
+          Id = id,
+          Username = creds.Username,
+          Email = creds.Email,
+          Password = creds.Password
+        });
 
         return new UserReturnModel()
         {
