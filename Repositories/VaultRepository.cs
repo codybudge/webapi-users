@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,18 +17,18 @@ namespace API_Users.Repositories
     }
     public IEnumerable<Vault> GetAll()
     {
-      return _db.Query<Vault>("SELECT * FROM vault");
+      return _db.Query<Vault>("SELECT * FROM vaults");
     }
 
-    public  Vault GetById(string id)
+    public  Vault GetById(int id)
     {
-      return _db.Query<Vault>("Select * FROM vault WHERE id=@id", new{id}).FirstOrDefault();
-
+      return _db.Query<Vault>("Select * FROM vaults WHERE id=@id", new{id}).FirstOrDefault();
       }
+
       public Vault AddVault(Vault newVault)
       {
         string id = _db.ExecuteScalar<string>(@"
-        INSERT INTO smoothies (name, description)
+        INSERT INTO vaults (name, description)
         VALUES(@Name, @Description);
          SELECT LAST_INSERT_ID()", newVault);
         newVault.userId = id;

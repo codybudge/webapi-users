@@ -11,7 +11,6 @@ using API_Users.Repositories;
 namespace API_Users.Controllers
 {
     [Route("api/[controller]")]
-    // [ApiController]
   public class VaultController: Controller
   {
     private readonly VaultRepository db;
@@ -20,21 +19,21 @@ namespace API_Users.Controllers
       db = repo;
     }
 
-    //GET api/vaults
+    //GET api/vault
     [HttpGet]
     public IEnumerable<Vault> Get()
     {
       return db.GetAll();
     }
 
-    //GET api/vaults/192bd9837s9_12389x129x38 _273bxb19x36
+    //GET api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpGet("{id}")]
-    public Vault Get(string id)
+    public Vault Get(int id)
     {
       return db.GetById(id);
     }
 
-    //POST api/vaults
+    //POST api/vault
     [HttpPost]
     public Vault Post([FromBody]Vault newVault)
     {
@@ -45,15 +44,15 @@ namespace API_Users.Controllers
       return null;
     }
 
-    //PUT api/vaults/192bd9837s9_12389x129x38 _273bxb19x36
+    //PUT api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpPut("{id}")]
-    public void Put(string id, [FromBody]string value)
+    public void Put(int id, [FromBody]string value)
     {
     }
 
-    //DELETE api/vaults/192bd9837s9_12389x129x38 _273bxb19x36
+    //DELETE api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpDelete("{id}")]
-    public void Delete(string id)
+    public void Delete(int id)
     {
     }
   }
