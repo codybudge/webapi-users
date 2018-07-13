@@ -1,12 +1,18 @@
 <template>
   <div class="login">
-    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

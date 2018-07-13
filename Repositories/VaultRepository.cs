@@ -20,18 +20,18 @@ namespace API_Users.Repositories
       return _db.Query<Vault>("SELECT * FROM vaults");
     }
 
-    public  Vault GetById(int id)
+    public  Vault GetById(string id)
     {
       return _db.Query<Vault>("Select * FROM vaults WHERE id=@id", new{id}).FirstOrDefault();
       }
 
       public Vault AddVault(Vault newVault)
       {
-        string id = _db.ExecuteScalar<string>(@"
-        INSERT INTO vaults (name, description)
-        VALUES(@Name, @Description);
+        _db.ExecuteScalar<string>(@"
+        INSERT INTO vaults (name, description, userId)
+        VALUES(@Name, @Description, @userId);
          SELECT LAST_INSERT_ID()", newVault);
-        newVault.userId = id;
+
         return newVault;
       }
     }

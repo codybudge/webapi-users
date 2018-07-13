@@ -56,6 +56,7 @@ namespace API_Users
             services.AddTransient<IDbConnection>(x => CreateDbContext());
             services.AddTransient<UserRepository>();
             services.AddTransient<VaultRepository>();
+            services.AddTransient<KeepsRepository>();
         }
 
         private IDbConnection CreateDbContext()

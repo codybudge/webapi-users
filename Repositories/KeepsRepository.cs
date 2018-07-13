@@ -25,14 +25,14 @@ namespace API_Users.Repositories
       return _db.Query<Keeps>("Select * FROM keeps WHERE id=@id", new{id}).FirstOrDefault();
       }
 
-      public Keeps AddKeeps(Keeps newVault)
+      public Keeps AddKeeps(Keeps newKeeps)
       {
-        string id = _db.ExecuteScalar<string>(@"
-        INSERT INTO keeps (name, description)
-        VALUES(@Name, @Description);
-         SELECT LAST_INSERT_ID()", newVault);
-        newVault.userId = id;
-        return newVault;
+        _db.ExecuteScalar<string>(@"
+        INSERT INTO keeps (name, description, userId)
+        VALUES(@Name, @Description, @userId);
+         SELECT LAST_INSERT_ID()", newKeeps);
+        
+        return newKeeps;
       }
   }
 }

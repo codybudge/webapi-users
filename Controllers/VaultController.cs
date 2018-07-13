@@ -28,15 +28,18 @@ namespace API_Users.Controllers
 
     //GET api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpGet("{id}")]
-    public Vault Get(int id)
+    public Vault Get(string id)
     {
       return db.GetById(id);
     }
 
+    [Authorize]
     //POST api/vault
     [HttpPost]
     public Vault Post([FromBody]Vault newVault)
     {
+      var userId = HttpContext.User.Identity.Name;
+      newVault.userId = userId;
       if (ModelState.IsValid)
       {
         return db.AddVault(newVault);
@@ -46,13 +49,13 @@ namespace API_Users.Controllers
 
     //PUT api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody]string value)
+    public void Put(string id, [FromBody]string value)
     {
     }
 
     //DELETE api/vault/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public void Delete(string id)
     {
     }
   }
