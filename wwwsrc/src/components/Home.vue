@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid Home"> 
-    <div class="nav justify-content-end">
+  <div class="container-fluid Home">
+    <div class="nav justify-content-center">
       <h4 class="nav-item">{{curentUser.name}}</h4>
       <button class="btn" @click="logout">logout</button>
     </div>

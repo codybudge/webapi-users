@@ -8,9 +8,9 @@
               <form @submit.prevent="userLogin">
                 <input type="text" name="email" id="email" v-model="login.emial" placeholder="email" required>
                 <input type="text" name="password" id="password" v-model="login.password" placeholder="password" required>
-                <button type="submit">LOGIN</button>
+                <button class="btn" type="submit">LOGIN</button>
               </form>
-              <button type="" @click="regLog">Register</button>
+              <button class="btn" type="" @click="regLog">Register</button> 
             </div>
           </div>
         </div>
