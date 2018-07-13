@@ -3,7 +3,25 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          
+          <div class="login-page">
+            <div v-if'logister'>
+              <form @submit.prevent="userLogin">
+                <input type="text" name="email" id="email" v-model="login.emial" placeholder="email" required>
+                <input type="text" name="password" id="password" v-model="login.password" placeholder="password" required>
+                <button type="submit">LOGIN</button>
+              </form>
+              <button type="" @click="regLog">Register</button>
+            </div>
+          </div>
+        </div>
+        <div v-if='!logister'>
+          <form @submit.prevent="userRegister">
+            <input type="text" name="email" id="email" v-model="register.email" placeholder='email' require>
+            <input type="text" name="name" id="name" v-model="register.name" placeholder='User Name' require>
+            <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
+            <button type="submit">REGISTER</button>
+          </form>
+          <button type='' @click="regLog">Login</button>
         </div>
       </div>
     </div>
@@ -13,28 +31,39 @@
 <script>
 export default {
   name: 'Login',
+  mounted(){
+    this.$store.dispatch('authenticate')
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+     logister: true,
+     login: {
+       email: '',
+       password: '',
+     },
+     register: {
+       email: '',
+       name: '',
+       password: '',
+     }
+     
+    }
+  },
+  computed: {},
+    methods: {
+      userLogin() {
+        this.$store.dispatch('login', this.login)
+      },
+      userRegister() {
+        this.$store.dispatch('register', this.register)
+      },
+      regLog() {
+        this.logister = !this.logister
+      }
     }
   }
-}
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
