@@ -5,12 +5,13 @@
         <div class="col">
           <div class="login-page">
             <div v-if'logister'>
+              <h1>This is the Login Page</h1>
               <form @submit.prevent="userLogin">
                 <input type="text" name="email" id="email" v-model="login.emial" placeholder="email" required>
                 <input type="text" name="password" id="password" v-model="login.password" placeholder="password" required>
                 <button class="btn" type="submit">LOGIN</button>
               </form>
-              <button class="btn" type="" @click="regLog">Register</button> 
+              <button class="btn" type="" @click="regLog">Register</button>
             </div>
           </div>
         </div>

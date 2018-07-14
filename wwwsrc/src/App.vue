@@ -7,6 +7,9 @@
 
 <script>
 export default {
+  mounted(){
+    this.$store.dispatch('authenticate')
+  },
   name: 'App'
 }
 </script>

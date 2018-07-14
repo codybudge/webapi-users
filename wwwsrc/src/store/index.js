@@ -24,58 +24,58 @@ export default new vuex.Store({
   state: {
     user: {},
   },
-  mutation: {
+  mutations: {
     setUser(state, user) {
       state.user = user
     },
     deleteUser(state) {
       state.user = {}
-    },
-
-    actions: {
-      login({ commit, dispatch }, loginCredentials) {
-        auth.post('login', loginCredentials)
-          .then(res => {
-            commit('setUser', res.data)
-            router.push({ name: 'Home' })
-          })
-      }
     }
   },
 
-  logout({ commit, dispatch }) {
-    auth.delete('logout', )
-      .then(res => {
-        console.log(res)
-        commit('deleteUser')
-        router.push({ name: 'Login' })
-      })
-      .catch(res => {
-        console.log(res.data)
-      })
-  },
+  actions: {
+    login({ commit, dispatch }, payload) {
+      auth.post('login', payload)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'Home' })
+        })
+    },
 
-  register({ commit, dispatch }, userData) {
-    console.log(userData)
-    auth.post('/register/', userData)
-      .then(res => {
-        commit('setUser', res.data)
-        router.push({ name: 'Home' })
-      })
-      .catch(res => {
-        console.log(res.data)
-      })
-  },
+    logout({ commit, dispatch }) {
+      auth.delete('logout', )
+        .then(res => {
+          console.log(res)
+          commit('deleteUser')
+          router.push({ name: 'Login' })
+        })
+        .catch(res => {
+          console.log(res.data)
+        })
+    },
 
-  authenticate({ commit, dispatch }) {
-    api.get('/authenticate')
-      .then(res => {
-        commit('setUser', res.data)
-        router.push({ name: 'Home' })
-      })
-      .catch(res => {
-        console.log(res.data)
-      })
-  },
+    register({ commit, dispatch }, payload) {
+      console.log(payload)
+      auth.post('/register/', payload)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'Home' })
+        })
+        .catch(res => {
+          console.log(res.data)
+        })
+    },
+
+    authenticate({ commit, dispatch }) {
+      auth.get('/authenticate')
+          .then(res => {
+              commit('setUser', res.data)
+              router.push({ name: 'Home' })
+          })
+          .catch(res => {
+              console.log(res.data)
+          })
+    },
+  }
 })
 
