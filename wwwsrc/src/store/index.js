@@ -4,7 +4,7 @@ import axios from 'axios'
 import router from "../router"
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//monster-keepr.herokuapp.com/' : '//localhost:3000/';
+var baseUrl = production ? '//monster-keepr.herokuapp.com/' : '//localhost:5000/';
 
 let api = axios.create({
   baseURL: baseUrl,
@@ -13,7 +13,7 @@ let api = axios.create({
 })
 
 let auth = axios.create({
-  baseURL: baseUrl + 'auth/',
+  baseURL: baseUrl + 'account/',
   timeout: 3000,
   withCredentials: true
 })
@@ -22,26 +22,82 @@ vue.use(vuex)
 
 export default new vuex.Store({
   state: {
-    user: {},
+    currentUser: {},
+    keeps: {},
+    vaults: {},
+    currentKeep: {},
+    currentVault: {}
   },
   mutations: {
     setUser(state, user) {
       state.user = user
     },
-    deleteUser(state) {
-      state.user = {}
+    setKeeps(state, keeps) {
+      state.keeps = keeps
+    },
+    setKeep(state, keep) {
+      state.currentKeep = keep
+    },
+    setVaults(state, vaults) {
+    state.vaults = vaults
+    },
+    setVault(state, vault) {
+      state.currentVault = vault
     }
   },
 
   actions: {
-    login({ commit, dispatch }, payload) {
-      auth.post('login', payload)
-        .then(res => {
-          commit('setUser', res.data)
-          router.push({ name: 'Home' })
-        })
+    //Vault Keep
+    addToVault({dispatch, commit, state}, vault){
+      var newvk = {}
+      newvk.userId = state.currentUser.id
+      newvk.keepId = state.currentKeep.id
+      newvk.vaultId = vault.id
+      console.log(newvk)
+      api.post('/vaultkeeps', newvk)
+      .then(res=>{
+        console.log(res)
+        var newKeep = state.currentKeep
+        newKeep.saves = state.currentKeep.saves+1
+        dispatch('editKeep', newKeep)
+      })
     },
-
+    getVaultKeeps({dispatch, commit, state}) {
+      api.get('/vaultkeeps/vault/' + state.currentVault.id)
+      .then(res => {
+        console.log('res')
+        dispatch('getKeepsFromVault', res.data)
+      })
+    },
+    //Vault
+    getVaults({dispatch,commit, state}) {
+      api.get('/vaults/author/' + currentUser.id)
+      .thne(res => {
+        commit('setVaults', res.data)
+        console.log(res.data)
+      })
+    },
+    setVault({commit}) {
+      commit('setVault', vault)
+    },
+    
+    
+    
+    
+    //Keeps
+    
+    
+    
+    
+    
+    //auth
+      login({ commit, dispatch }, payload) {
+        auth.post('login', payload)
+          .then(res => {
+            commit('currentUser', res.data)
+            router.push({ name: 'Home' })
+          })
+      },
     logout({ commit, dispatch }) {
       auth.delete('logout', )
         .then(res => {
@@ -58,7 +114,7 @@ export default new vuex.Store({
       console.log(payload)
       auth.post('/register/', payload)
         .then(res => {
-          commit('setUser', res.data)
+          commit('currentUser', res.data)
           router.push({ name: 'Home' })
         })
         .catch(res => {
@@ -69,7 +125,7 @@ export default new vuex.Store({
     authenticate({ commit, dispatch }) {
       auth.get('/authenticate')
           .then(res => {
-              commit('setUser', res.data)
+              commit('currentUser', res.data)
               router.push({ name: 'Home' })
           })
           .catch(res => {

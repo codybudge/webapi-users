@@ -2,21 +2,24 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <input type="url" placeholder="Image Url" v-model="newKeep.img" >
+        <input type="url" placeholder="Image Url" v-model="newKeep.img">
         <input type="text" name="description" placeholder="Description" id="description" v-model="newKeep.description">
       </div>
     </div>
-    
+
 
   </div>
 </template>
 
 <script>
+
+  import router from '../router'
+
   export default {
-    name: '',
+    name: 'Keeps',
     data() {
       return {
-        newKeep:{
+        newKeep: {
           img: '',
           description: ''
         },
@@ -25,16 +28,13 @@
     },
     computed: {
       keeps() {
-        //go to store to get keeps
+        this.$store.state.keeps
       },
-      vaults() {
-        //go to store to get vaults
-      }
     },
     methods: {
-          createKeep() {
-            this.$store.dispatch("createKeep", this.newKeep)
-          }
+      createKeep() {
+        this.$store.dispatch("createKeep", this.newKeep)
+      }
 
     }
   }
@@ -42,6 +42,4 @@
 </script>
 
 <style>
-
-
 </style>
