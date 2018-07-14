@@ -14,15 +14,15 @@
               <button class="btn" type="" @click="regLog">Register</button>
             </div>
           </div>
-        </div>
-        <div v-if='!logister'>
-          <form @submit.prevent="userRegister">
-            <input type="text" name="email" id="email" v-model="register.email" placeholder='email' require>
-            <input type="text" name="name" id="name" v-model="register.name" placeholder='User Name' require>
-            <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
-            <button type="submit">REGISTER</button>
-          </form>
-          <button type='' @click="regLog">Login</button>
+          <div v-if='!logister'>
+            <form @submit.prevent="userRegister">
+              <input type="text" name="email" id="email" v-model="register.email" placeholder='email' require>
+              <input type="text" name="name" id="name" v-model="register.name" placeholder='User Name' require>
+              <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
+              <button class="btn" type="submit">REGISTER</button>
+            </form>
+            <button class="btn" type='' @click="regLog">Login</button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +50,11 @@ export default {
      
     }
   },
-  computed: {},
+  computed: {
+    setUser(){
+      return this.$store.dispatch.setUser
+    }
+  },
     methods: {
       userLogin() {
         this.$store.dispatch('login', this.login)

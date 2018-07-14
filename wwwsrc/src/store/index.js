@@ -30,7 +30,7 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
-      state.user = user
+      state.currentUser = user
     },
     setKeeps(state, keeps) {
       state.keeps = keeps
@@ -80,7 +80,7 @@ export default new vuex.Store({
     setVault({commit}) {
       commit('setVault', vault)
     },
-    
+
     
     
     
@@ -94,27 +94,17 @@ export default new vuex.Store({
       login({ commit, dispatch }, payload) {
         auth.post('login', payload)
           .then(res => {
-            commit('currentUser', res.data)
+            commit('setUser', res.data)
             router.push({ name: 'Home' })
           })
       },
-    logout({ commit, dispatch }) {
-      auth.delete('logout', )
-        .then(res => {
-          console.log(res)
-          commit('deleteUser')
-          router.push({ name: 'Login' })
-        })
-        .catch(res => {
-          console.log(res.data)
-        })
-    },
+   
 
     register({ commit, dispatch }, payload) {
       console.log(payload)
       auth.post('/register/', payload)
         .then(res => {
-          commit('currentUser', res.data)
+          commit('setUser', res.data)
           router.push({ name: 'Home' })
         })
         .catch(res => {
@@ -125,7 +115,7 @@ export default new vuex.Store({
     authenticate({ commit, dispatch }) {
       auth.get('/authenticate')
           .then(res => {
-              commit('currentUser', res.data)
+              commit('setUser', res.data)
               router.push({ name: 'Home' })
           })
           .catch(res => {
