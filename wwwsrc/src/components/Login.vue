@@ -9,7 +9,7 @@
               <form @submit.prevent="userLogin">
                 <input type="text" name="email" id="email" v-model="login.emial" placeholder="email" required>
                 <input type="password" name="password" id="password" v-model="login.password" placeholder="password" required>
-                <button class="btn" type="submit">LOGIN</button>
+                <button class="btn" type="submit">Login</button>
               </form>
               <button class="btn" type="" @click="regLog">Register</button>
             </div>
@@ -19,7 +19,7 @@
               <input type="text" name="email" id="email" v-model="register.email" placeholder='email' require>
               <input type="text" name="name" id="name" v-model="register.name" placeholder='User Name' require>
               <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
-              <button class="btn" type="submit">REGISTER</button>
+              <button class="btn" type="submit">Register</button>
             </form>
             <button class="btn" type='' @click="regLog">Login</button>
           </div>
@@ -32,9 +32,6 @@
 <script>
 export default {
   name: 'Login',
-  mounted(){
-    this.$store.dispatch('authenticate')
-  },
   data () {
     return {
      logister: true,
@@ -57,6 +54,7 @@ export default {
   },
     methods: {
       userLogin() {
+        
         this.$store.dispatch('login', this.login)
       },
       userRegister() {

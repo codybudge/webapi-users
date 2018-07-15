@@ -8,6 +8,7 @@
 <script>
 export default {
   mounted(){
+    console.log("I got here")
     this.$store.dispatch('authenticate')
   },
   name: 'App'

@@ -18,10 +18,10 @@ export default new Router({
       component: Home
     },
     {
-    path: '/Keeps',
-    name: 'Keeps',
-    component: Keeps
+      path: '/Keeps',
+      name: 'Keeps',
+      component: Keeps
     }
-  
+    
   ]
 })
