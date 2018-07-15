@@ -114,8 +114,7 @@ export default new vuex.Store({
     },
 
     authenticate({ commit, dispatch },) {
-      debugger
-      auth.get('/authenticate/',)
+      auth.get('/account/authenticate/',)
       .then(res => {
             commit('setUs er', res.data)
               router.push({ name: 'Home' })

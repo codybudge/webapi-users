@@ -7,7 +7,7 @@
             <div v-if="logister">
               <h1>This is the Login Page</h1>
               <form @submit.prevent="userLogin">
-                <input type="text" name="email" id="email" v-model="login.emial" placeholder="email" required>
+                <input type="text" name="email" id="email" v-model="login.email" placeholder="email" required>
                 <input type="password" name="password" id="password" v-model="login.password" placeholder="password" required>
                 <button class="btn" type="submit">Login</button>
               </form>
@@ -17,7 +17,7 @@
           <div v-if='!logister'>
             <form @submit.prevent="userRegister">
               <input type="text" name="email" id="email" v-model="register.email" placeholder='email' require>
-              <input type="text" name="name" id="name" v-model="register.name" placeholder='User Name' require>
+              <input type="text" name="username" id="name" v-model="register.username" placeholder='Username' require>
               <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
               <button class="btn" type="submit">Register</button>
             </form>
@@ -49,7 +49,8 @@ export default {
   },
   computed: {
     setUser(){
-      return this.$store.dispatch.setUser
+      debbuger
+      return this.$store.state.setUser
     }
   },
     methods: {
