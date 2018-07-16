@@ -21,7 +21,7 @@
                 <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
                 <button class="btn" type="submit">Register</button>
               </form>
-              <button class="btn" type='' @click="regLog">Login</button>
+              <button class="btn" type="" @click="regLog">Login</button>
             </div>
           </div>
         </div>
@@ -49,13 +49,11 @@
     },
     computed: {
       setUser(){
-        
-        return this.$store.state.setUser
+        return this.$store.state.currentUser
       }
     },
       methods: {
         userLogin() {
-          
           this.$store.dispatch('login', this.login)
         },
         userRegister() {

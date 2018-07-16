@@ -24,7 +24,7 @@
         Keeps,
       },
       computed: {
-        curentUser() {
+        currentUser() {
           return this.$store.state.currentUser
         }
       },

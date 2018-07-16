@@ -3,7 +3,7 @@
       <nav class="navbar sticky-top navbar-light bg-light">
         <h2>Keepr</h2>
         <div v-if="User.id">
-          Welcome: {{User.username}}
+          Welcome {{User.username}}
           <button @click="logout">Logout</button>
         </div>
       </nav>

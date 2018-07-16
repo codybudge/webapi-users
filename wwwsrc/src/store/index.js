@@ -7,7 +7,7 @@ var production = !window.location.host.includes('localhost');
 var baseUrl = production ? '//monster-keepr.herokuapp.com/' : '//localhost:5000/';
 
 let api = axios.create({
-  baseURL: baseUrl,
+  baseURL: baseUrl + 'api',
   timeout: 3000,
   withCredentials: true
 })
@@ -20,6 +20,7 @@ let auth = axios.create({
 
 vue.use(vuex)
 
+
 export default new vuex.Store({
   state: {
     currentUser: {},
@@ -30,6 +31,7 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
+      debugger
       state.currentUser = user
     },
     setKeeps(state, keeps) {
@@ -47,7 +49,7 @@ export default new vuex.Store({
   },
 
   actions: {
-    //Vault Keep
+    //Vault Keep -----------------------------------------------------------------
     addToVault({ dispatch, commit, state }, vault) {
       var newvk = {}
       newvk.userId = state.currentUser.id
@@ -69,35 +71,20 @@ export default new vuex.Store({
           dispatch('getKeepsFromVault', res.data)
         })
     },
-    //Vault
+    //Vault -----------------------------------------------------------------
     getVaults({ dispatch, commit, state }) {
       api.get('/vaults/author/' + currentUser.id)
-        .thne(res => {
-          commit('setVaults', res.data)
-          console.log(res.data)
-        })
+      .thne(res => {
+        commit('setVaults', res.data)
+        console.log(res.data)
+      })
     },
     setVault({ commit }) {
       commit('setVault', vault)
     },
 
-    //Keeps
-    setKeep({ commit }, keep) {
-      commit("setKeep", keep)
-    },
-    getAllKeeps({ commit, dispatch }) {
-      api.get('/keeps')
-        .then(res => {
-          commit('setKeeps', res.data)
-        })
-    },
-    getKeepId({ commit, dispatch, state }) {
-      api.get('/keeps/' + state.currentKeep.Id)
-        .then(res => {
-          commit('setKeeps', res.data)
-        })
-    },
-    createKeep({commit, dispatch, state}, payload){
+    //Keeps -----------------------------------------------------------------
+    createKeep({commit, dispatch, state}, payload){ 
       payload.userId = state.currentUser.id
       payload.Username = state.currentUser.username
       api.post('/keeps', payload)
@@ -105,8 +92,23 @@ export default new vuex.Store({
         dispatch('getAllKeeps')
       })
     },
+    setKeep({ commit }, keep) {
+      commit("setKeep", keep)
+    },
+    getAllKeeps({ commit, dispatch }) {
+      api.get('/keeps')
+      .then(res => {
+        commit('setKeeps', res.data)
+      })
+    },
+    getKeepId({ commit, dispatch, state }) {
+      api.get('/keeps/' + state.currentKeep.Id)
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
+    },
 
-    //auth
+    //auth -----------------------------------------------------------------
     login({ commit, dispatch }, payload) {
       auth.post('login', payload)
         .then(res => {
@@ -115,7 +117,7 @@ export default new vuex.Store({
         })
     },
     logout({dispatch, commit,state}){
-      auth.delete('/'+state.currentUser.id)
+      auth.delete('/' + state.currentUser.id)
       .then(res =>{
         console.log(res)
       })
