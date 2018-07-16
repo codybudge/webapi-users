@@ -4,6 +4,7 @@
       <div class="col">
         <input type="url" placeholder="Image Url" v-model="newKeep.img">
         <input type="text" name="description" placeholder="Description" id="description" v-model="newKeep.description">
+        <button class="btn" type="submit">Submit</button>
       </div>
     </div>
 
