@@ -1,6 +1,6 @@
 <template>
-  <div class="Nav">
-    <nav class="navbar sticky-top navbar-light bg-light">
+  <div class="Nav container-fluid">
+    <nav class="navbar navbar-light bg-light">
       <h2>Keepr</h2>
       <div v-if="User.id">
         Welcome: {{User.username}}
