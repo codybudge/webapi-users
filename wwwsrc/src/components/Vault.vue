@@ -1,36 +1,26 @@
 <template>
-    <div class="container-fluid">
+    <div class="vaults">
       <div class="row">
         <div class="col">
-          <h2>{{vault.title}}</h2>
+          <h1>Vault card here</h1>
+          <h3>Keeps here</h3>
         </div>
       </div>
-      <div class="keeps row">
-        <div v-for="keep in keeps" class="col-4">
-          
-        </div>
-      </div>
+  
     </div>
   </template>
   
   <script>
-    
     export default {
-      name: 'Vault',
-      components: {
-      
-      },
+      name: '',
       data() {
         return {
         }
       },
-      computed: {
-        
-      },
+      computed: {},
       methods: {}
     }
   </script>
   
   <style>
-
   </style>
