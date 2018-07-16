@@ -30,7 +30,6 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
-      console.log("I got here2")
       state.currentUser = user
     },
     setKeeps(state, keeps) {
@@ -84,7 +83,7 @@ export default new vuex.Store({
 
     //Keeps
     setKeep({ commit }, keep) {
-      commit("")
+      commit("setKeep", keep)
     },
     getAllKeeps({ commit, dispatch }) {
       api.get('/keeps')
@@ -98,40 +97,13 @@ export default new vuex.Store({
           commit('setKeeps', res.data)
         })
     },
-    getKeepVault({ commit, dispatch, state }, keeps) {
-      var newKeeps = []
-      for (let i = 0; i < keeps.length; i++) {
-        let currId = keeps[i].keepId;
-        api.get('/keeps/' + currId)
-          .then(res => {
-            newKeeps.push(res.data)
-          })
-      }
-    },
-    addNewKeep({commit, dispatch, state}, newKeep){
-      newKeep.userId = state.currentUser.id
-      newKeep.Username = state.currentUser.username
-      api.post('/keeps', newKeep)
+    createKeep({commit, dispatch, state}, payload){
+      payload.userId = state.currentUser.id
+      payload.Username = state.currentUser.username
+      api.post('/keeps', payload)
       .then(res => {
         dispatch('getAllKeeps')
       })
-    },
-    createKeep({ commit, dispatch, rootState }, keep) {
-      keep.author = rootState.userModule.user.username
-      server.post('/keep/' + keep.vaultId, keep)
-        .then(res => {
-          commit("setNewKeep", res.data)
-          server.post('/keep/tag/' + res.data.id, keep.tags)
-            .then(res => {
-              commit("setTags", res.data)
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        })
-        .catch(err => {
-          console.log(err)
-        })
     },
 
     //auth
@@ -142,7 +114,12 @@ export default new vuex.Store({
           router.push({ name: 'Home' })
         })
     },
-
+    logout({dispatch, commit,state}){
+      auth.delete('/'+state.currentUser.id)
+      .then(res =>{
+        console.log(res)
+      })
+    },
 
     register({ commit, dispatch }, payload) {
       console.log(payload)
@@ -157,7 +134,7 @@ export default new vuex.Store({
     },
 
     authenticate({ commit, dispatch }, ) {
-      auth.get('/account/authenticate/', )
+      auth.get('/authenticate/', )
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
