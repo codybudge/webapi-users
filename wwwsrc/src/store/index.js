@@ -116,6 +116,23 @@ export default new vuex.Store({
         dispatch('getAllKeeps')
       })
     },
+    createKeep({ commit, dispatch, rootState }, keep) {
+      keep.author = rootState.userModule.user.username
+      server.post('/keep/' + keep.vaultId, keep)
+        .then(res => {
+          commit("setNewKeep", res.data)
+          server.post('/keep/tag/' + res.data.id, keep.tags)
+            .then(res => {
+              commit("setTags", res.data)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
 
     //auth
     login({ commit, dispatch }, payload) {
@@ -142,7 +159,7 @@ export default new vuex.Store({
     authenticate({ commit, dispatch }, ) {
       auth.get('/account/authenticate/', )
         .then(res => {
-          commit('setUs er', res.data)
+          commit('setUser', res.data)
           router.push({ name: 'Home' })
         })
         .catch(res => {
