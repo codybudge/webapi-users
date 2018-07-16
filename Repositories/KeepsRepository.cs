@@ -28,8 +28,8 @@ namespace API_Users.Repositories
       public Keeps AddKeeps(Keeps newKeeps)
       {
         _db.ExecuteScalar<string>(@"
-        INSERT INTO keeps (name, description, userId)
-        VALUES(@Name, @Description, @userId);
+        INSERT INTO keeps (url, name, description, userId)
+        VALUES(@Url, @Name, @Description, @userId);   
          SELECT LAST_INSERT_ID()", newKeeps);
         
         return newKeeps;

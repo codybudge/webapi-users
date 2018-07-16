@@ -1,10 +1,10 @@
 <template>
-    <div class="Nav">
+    <div class="Nav container-fluid">
       <nav class="navbar sticky-top navbar-light bg-light">
         <h2>Keepr</h2>
         <div v-if="User.id">
-          Welcome {{User.username}}
-          <button @click="logout">Logout</button>
+          <h3>Welcome {{User.username}}</h3>
+          <button class="btn" @click="logout">Logout</button>
         </div>
       </nav>
     </div>

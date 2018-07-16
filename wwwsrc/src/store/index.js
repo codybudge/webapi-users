@@ -31,7 +31,6 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
-      debugger
       state.currentUser = user
     },
     setKeeps(state, keeps) {
@@ -114,6 +113,9 @@ export default new vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
+        })
+        .catch(res => {
+          console.log(res)
         })
     },
     logout({dispatch, commit,state}){

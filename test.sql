@@ -21,16 +21,20 @@
 
 -- CREATE TABLE keeps (
 --     id int NOT NULL AUTO_INCREMENT,
+--     url VARCHAR(255)
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
+--     public BOOLEAN NOT NULL,
 --     userId VARCHAR(255),
---     url VARCHAR(255),
+--     views int NOT NULL,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
 --         ON DELETE CASCADE,  
 --     PRIMARY KEY (id)
+    
 -- );
+
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -58,4 +62,12 @@
 -- SELECT * FROM vaultkeeps vk
 -- INNER JOIN keeps k ON k.id = vk.keepId 
 -- WHERE (vaultId = 2)
+
+
+
+
+
+
+--how to add to table
+-- ALTER TABLE keeps ADD views int NOT NULL
 
