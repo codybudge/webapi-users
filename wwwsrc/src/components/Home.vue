@@ -3,6 +3,7 @@
     <div class="nav justify-content-center">
       <Nav></Nav>
       <keeps></keeps>
+      <valts></valts>
       
     </div>
   </div>
@@ -12,6 +13,7 @@
   import router from '../router'
   import Keeps from './Keeps'
   import Nav from './Nav'
+  import Vault from '/Vaults'
 
     export default {
     name: 'Home',
@@ -23,6 +25,7 @@
     components: {
       Nav,
       Keeps,
+      Vault,
     },
     computed: {
       curentUser() {
