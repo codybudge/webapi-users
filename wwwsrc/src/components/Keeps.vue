@@ -8,7 +8,6 @@
           <input type="text" name="name"placeholder="Title" v-model="newKeep.name">
           <input type="text" name="description" placeholder="Description" id="description" v-model="newKeep.description">
           <button class="btn" type="submit">Submit</button>
-          <!-- <button class="btn" type=""></button> -->
         </form>
       </div>
     </div>

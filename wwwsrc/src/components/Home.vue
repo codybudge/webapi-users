@@ -3,6 +3,7 @@
       <div class="nav justify-content-center">
         <Nav></Nav>
         <Keeps></Keeps>
+        <Vault></Vault>
         
         
       </div>
@@ -14,6 +15,7 @@
     import Keeps from './Keeps'
     import Nav from './Nav'
     import SeeKeep from './SeeKeep'
+    import Vault from './Vault'
       export default {
       name: 'Home',
       mounted() {
@@ -25,6 +27,7 @@
         Nav,
         Keeps,
         SeeKeep,
+        Vault,
       },
       computed: {
         currentUser() {

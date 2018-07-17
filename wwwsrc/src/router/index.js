@@ -36,9 +36,9 @@ export default new Router({
       component: Vault
     },
     // {
-    //   path: '/ViewVault',
-    //   name: 'ViewVault',
-    //   component: ViewVault
+      // path: '/ViewVault',
+      // name: 'ViewVault',
+      // component: ViewVault
     // },
 
     
