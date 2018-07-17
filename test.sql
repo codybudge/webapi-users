@@ -26,7 +26,8 @@
 --     description VARCHAR(255) NOT NULL,
 --     public BOOLEAN NOT NULL,
 --     userId VARCHAR(255),
---     views int NOT NULL,
+--     views int,
+--     saves int,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -69,5 +70,5 @@
 
 
 --how to add to table
--- ALTER TABLE keeps ADD views int NOT NULL
+-- ALTER TABLE keeps ADD saves int NOT NULL
 

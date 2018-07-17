@@ -2,7 +2,8 @@
     <div class="container-fluid Home">
       <div class="nav justify-content-center">
         <Nav></Nav>
-        <keeps></keeps>
+        <Keeps></Keeps>
+        <SeeKeep></SeeKeep>
         
       </div>
     </div>
@@ -12,6 +13,7 @@
     import router from '../router'
     import Keeps from './Keeps'
     import Nav from './Nav'
+    import SeeKeep from './SeeKeep'
       export default {
       name: 'Home',
       mounted() {
@@ -22,6 +24,7 @@
       components: {
         Nav,
         Keeps,
+        SeeKeep,
       },
       computed: {
         currentUser() {

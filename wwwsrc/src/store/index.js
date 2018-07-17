@@ -90,10 +90,22 @@ export default new vuex.Store({
       .then(res => {
         dispatch('getAllKeeps')
       })
+      
+    },
+    addNewKeep({ dispatch, commit, state }, newKeep) {
+      newKeep.UserId = state.currentUser.id
+      newKeep.Username = state.currentUser.username
+      api.post('/keeps', newKeep)
+        .then(res => {
+          state.currentKeep = res.data
+          router.push({name: "DetailOfKeep"})
+          
+        })
     },
     setKeep({ commit }, keep) {
       commit("setKeep", keep)
     },
+    
     getAllKeeps({ commit, dispatch }) {
       api.get('/keeps')
       .then(res => {
