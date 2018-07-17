@@ -2,11 +2,11 @@
   <div class="Create">
       <div v-for="SeeKeep in Keeps" class="col">
           <div class="card" style="width: 18rem;">
-            <h3 class="card-tiltle">{{keep.name}}</h3>
-              <img class="card-img-top" src="keep.url" alt="Card image">
+            <h3 class="card-tiltle">{{SeeKeep.name}}</h3>
+              <img class="card-img-top" src="SeeKeep.url" alt="Card image">
               <div class="card-body">
-                <p class="card-text">{{keep.description}}</p>
-                <p class="card-text">Views:{{keep.views}} Saves: {{keep.saves}}</p>
+                <p class="card-text">{{SeeKeep.description}}</p>
+                <p class="card-text">Views:{{SeeKeep.views}} Saves: {{SeeKeep.saves}}</p>
                 <a href="#" @click="setKeep(keep)">View Keep</a>
               </div>
             </div>
@@ -15,8 +15,11 @@
 </template>
 
 <script>
+  import Nav from './Nav'
   export default {
-
+    created(){
+      this.$store.dispatch('getAllKeeps')
+    },
     name: 'SeeKeep',
 
     components: {

@@ -2,10 +2,13 @@
     <div class="Nav container-fluid">
       <nav class="navbar sticky-top navbar-light bg-light">
         <h2>Keepr</h2>
+        <router-link :to="{name:'SeeKeep'}">
+          All Posts
+        </router-link>
         <div v-if="User.id">
-          <h3>Welcome {{User.username}}</h3>
-          <button class="btn" @click="logout">Logout</button>
+          <h3>Hello {{User.username}}</h3>
         </div>
+        <button class="btn" @click="logout">Logout</button>
       </nav>
     </div>
   </template>

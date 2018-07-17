@@ -30,15 +30,15 @@
     },
     computed: {
       keeps() {
-        this.$store.state.keeps
+        return this.$store.state.keeps
       },
       currentUser(){
-        this.$store.state.currentUser
+        return this.$store.state.currentUser
       }
     },
     methods: {
       createKeep() {
-        this.$store.dispatch("createKeep", this.newKeep)
+        return this.$store.dispatch("createKeep", this.newKeep)
       }
     }
   }

@@ -3,7 +3,7 @@
       <div class="nav justify-content-center">
         <Nav></Nav>
         <Keeps></Keeps>
-        <SeeKeep></SeeKeep>
+        
         
       </div>
     </div>
