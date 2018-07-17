@@ -71,6 +71,15 @@ export default new vuex.Store({
         })
     },
     //Vault -----------------------------------------------------------------
+    addNewVault({ dispatch, commit, state }, newVault) {
+      newVault.UserId = state.currentUser.id
+      newVault.Username = state.currentUser.username
+      api.post('/vaults', newVault)
+        .then(res => {
+          state.currentVault = res.data
+          router.push({name: "ViewVault"})
+        })
+    },
     getVaults({ dispatch, commit, state }) {
       api.get('/vaults/author/' + currentUser.id)
       .thne(res => {
@@ -98,11 +107,12 @@ export default new vuex.Store({
       api.post('/keeps', newKeep)
         .then(res => {
           state.currentKeep = res.data
-          router.push({name: "DetailOfKeep"})
+          router.push({name: "ViewKeep"})
           
         })
     },
     setKeep({ commit }, keep) {
+      debugger
       commit("setKeep", keep)
     },
     
