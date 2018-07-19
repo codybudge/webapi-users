@@ -80,14 +80,14 @@ export default new vuex.Store({
           router.push({name: "ViewVault"})
         })
     },
-    getVaults({ dispatch, commit, state }) {
+    getVaults({ dispatch, commit, state }, currentUser){
       api.get('/vaults/author/' + currentUser.id)
       .then(res => {
         commit('setVaults', res.data)
         console.log(res.data)
       })
     },
-    setVault({ commit }) {
+    setVault({ commit }, vault) {
       commit('setVault', vault)
     },
 
@@ -159,7 +159,7 @@ export default new vuex.Store({
         })
     },
 
-    authenticate({ commit, dispatch }, ) {
+    authenticate({ commit, dispatch }) {
       auth.get('/authenticate/', )
         .then(res => {
           commit('setUser', res.data)

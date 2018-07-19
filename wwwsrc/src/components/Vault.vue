@@ -8,11 +8,11 @@
             <div v-if="currentUser.id">
         <form @submit.prevent="addNewVault">
           <input type="text" placeholder="description" v-model="newVault.Description">
-          <button type="submit">Submit</button>
+          <button class="btn" type="submit">Submit</button>
         </form>
         <div v-for="vault in vaults">
           <router-link :to="{name: 'ViewVault'}">
-            <button @click="setVault(vault)">Go to Vault</button>
+            <button class="btn" @click="setVault(vault)">Go to Vault</button>
           </router-link>
         </div>
       </div>
@@ -28,6 +28,9 @@
     name: 'Vault',
     data() {
       return {
+        newVault: {
+          Description: ''
+        }
       }
     },
     // created() {
