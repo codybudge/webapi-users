@@ -21,6 +21,8 @@
       mounted() {
         if (!this.$store.state.currentUser.id) {
           router.push({ name: 'Login' })
+        }else{
+          this.$store.dispatch("getAllKeeps")
         }
       },
       components: {

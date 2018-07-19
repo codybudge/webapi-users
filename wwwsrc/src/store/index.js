@@ -24,10 +24,10 @@ vue.use(vuex)
 export default new vuex.Store({
   state: {
     currentUser: {},
-    keeps: {},
-    vaults: {},
+    keeps: [],
+    vaults: [],
     currentKeep: {},
-    currentVault: {}
+    activeVault: {}
   },
   mutations: {
     setUser(state, user) {
@@ -42,8 +42,9 @@ export default new vuex.Store({
     setVaults(state, vaults) {
       state.vaults = vaults
     },
-    setVault(state, vault) {
-      state.currentVault = vault
+    setActiveVault(state, vaultId) {
+      debugger
+      state.activeVault = state.vaults.find(v=> v.id == vaultId)
     }
   },
 
@@ -64,7 +65,7 @@ export default new vuex.Store({
         })
     },
     getVaultKeeps({ dispatch, commit, state }) {
-      api.get('/vaultkeeps/vault/' + state.currentVault.id)
+      api.get('/vaultkeeps/vault/' + state.activeVault.id)
         .then(res => {
           console.log('res')
           dispatch('getKeepsFromVault', res.data)
@@ -74,21 +75,22 @@ export default new vuex.Store({
     addNewVault({ dispatch, commit, state }, newVault) {
       newVault.UserId = state.currentUser.id
       newVault.Username = state.currentUser.username
-      api.post('/vaults', newVault)
+      api.post('/vault', newVault)
         .then(res => {
-          state.currentVault = res.data
-          router.push({name: "ViewVault"})
+          //state.currentVault = res.data
+          //router.push({name: "ViewVault"})
         })
     },
-    getVaults({ dispatch, commit, state }, currentUser){
-      api.get('/vaults/author/' + currentUser.id)
+    getVaults({ dispatch, commit, }){
+      api.get('/vault')
       .then(res => {
         commit('setVaults', res.data)
         console.log(res.data)
       })
     },
-    setVault({ commit }, vault) {
-      commit('setVault', vault)
+    setActiveVault({ commit }, vaultId) {
+      debugger
+      commit('setActiveVault', vaultId)
     },
 
     //Keeps -----------------------------------------------------------------
@@ -106,8 +108,8 @@ export default new vuex.Store({
       newKeep.Username = state.currentUser.username
       api.post('/keeps', newKeep)
         .then(res => {
-          state.currentKeep = res.data
-          router.push({name: "ViewKeep"})
+          //state.currentKeep = res.data
+          //router.push({name: "ViewKeep"})
           
         })
     },
@@ -135,6 +137,7 @@ export default new vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
+          dispatch('getVaults', res.data)
         })
         .catch(res => {
           console.log(res)
@@ -153,6 +156,7 @@ export default new vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
+          dispatch('getVaults', res.data)
         })
         .catch(res => {
           console.log(res.data)
@@ -164,6 +168,7 @@ export default new vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'Home' })
+          dispatch('getVaults', res.data)
         })
         .catch(res => {
           console.log(res.data)

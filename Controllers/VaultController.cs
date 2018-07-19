@@ -20,17 +20,12 @@ namespace API_Users.Controllers
     }
 
     //GET api/vault
+    [Authorize]
     [HttpGet]
     public IEnumerable<Vault> Get()
     {
-      return db.GetAll();
-    }
-
-    //GET api/vault/192bd9837s9_12389x129x38 _273bxb19x36
-    [HttpGet("{id}")]
-    public Vault Get(string id)
-    {
-      return db.GetById(id);
+      var id = HttpContext.User.Identity.Name;
+      return db.GetAll(id);
     }
 
     [Authorize]

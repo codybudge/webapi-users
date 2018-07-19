@@ -2,20 +2,27 @@
   <div class="vaults">
     <div class="row">
       <div class="col">
-          <div v-if="!currentUser.id">
-              <h1>Login to Create Vaults</h1>
-            </div>
-            <div v-if="currentUser.id">
-        <form @submit.prevent="addNewVault">
-          <input type="text" placeholder="description" v-model="newVault.Description">
-          <button class="btn" type="submit">Submit</button>
-        </form>
-        <div v-for="vault in vaults">
-          <router-link :to="{name: 'ViewVault'}">
-            <button class="btn" @click="setVault(vault)">Go to Vault</button>
-          </router-link>
+        <div v-if="!currentUser.id">
+          <h1>Login to Create Vaults</h1>
         </div>
-      </div>
+        <div v-if="currentUser.id">
+          <form @submit.prevent="addNewVault">
+            <input type="text" placeholder="Title" v-model="newVault.name">
+            <input type="text" placeholder="description" v-model="newVault.Description">
+            <button class="btn" type="submit">Submit</button>
+          </form>
+          <div v-for="vault in vaults">
+            <div class="card" style="width: 18rem;">
+              <h3 class="card-title">{{vault.name}}</h3>
+              <div class="card-body">
+                <p class="card-text">{{vault.description}}</p>
+                <router-link :to="{name: 'ViewVault', params: {vaultId: vault.id}}">
+                  Go to Vault
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

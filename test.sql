@@ -21,7 +21,7 @@
 
 -- CREATE TABLE keeps (
 --     id int NOT NULL AUTO_INCREMENT,
---     url VARCHAR(255)
+--     url VARCHAR(255),
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     public BOOLEAN NOT NULL,
@@ -58,17 +58,20 @@
 --     FOREIGN KEY (keepId)
 --         REFERENCES keeps(id)
 --         ON DELETE CASCADE
--- )
+-- );
 
 -- SELECT * FROM vaultkeeps vk
 -- INNER JOIN keeps k ON k.id = vk.keepId 
--- WHERE (vaultId = 2)
+-- WHERE (vaultId = @vaultId)
 
 
 
 
 
 
---how to add to table
--- ALTER TABLE keeps ADD saves int NOT NULL
+-- how to add to table
+-- ALTER TABLE keeps DROP COLUMN saves
+-- ALTER TABLE keeps DROP COLUMN views
+-- ALTER TABLE keeps ADD public
+
 

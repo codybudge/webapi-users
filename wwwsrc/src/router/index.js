@@ -5,7 +5,7 @@ import Login from '@/components/Login'
 import Keeps from '@/components/Keeps'
 import SeeKeep from '@/components/SeeKeep'
 import Vault from '@/components/Vault'
-// import ViewVault from '/components/ViewVault'
+import ViewVault from '@/components/ViewVault'
 Vue.use(Router)
 
 export default new Router({
@@ -35,11 +35,12 @@ export default new Router({
       name: 'Vault',
       component: Vault
     },
-    // {
-      // path: '/ViewVault',
-      // name: 'ViewVault',
-      // component: ViewVault
-    // },
+    {
+      path: '/ViewVault/:vaultId',
+      name: 'ViewVault',
+      props: true,
+      component: ViewVault
+    },
 
     
   ]

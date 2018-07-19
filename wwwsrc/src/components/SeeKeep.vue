@@ -4,7 +4,7 @@
       <Nav></Nav>
       <div v-for="SeeKeep in Keeps" class="col">
           <div class="card" style="width: 18rem;">
-            <h3 class="card-tiltle">{{SeeKeep.name}}</h3>
+            <h3 class="card-title">{{SeeKeep.name}}</h3>
               <img class="card-img-top" src="SeeKeep.url" alt="Card image">
               <div class="card-body">
                 <p class="card-text">{{SeeKeep.description}}</p>
