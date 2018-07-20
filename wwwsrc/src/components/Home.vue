@@ -4,8 +4,6 @@
         <Nav></Nav>
         <Keeps></Keeps>
         <Vault></Vault>
-        
-        
       </div>
     </div>
   </template>

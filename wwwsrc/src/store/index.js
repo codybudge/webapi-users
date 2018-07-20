@@ -28,7 +28,8 @@ export default new vuex.Store({
     vaults: [],
     currentKeep: {},
     activeVault: {},
-    vaultKeeps: []
+    vaultKeeps: [],
+    myKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -40,20 +41,23 @@ export default new vuex.Store({
     setKeep(state, keep) {
       state.currentKeep = keep
     },
+    setMyKeeps(state, keeps) {
+      state.myKeeps = keeps
+    },
     setVaults(state, vaults) {
       state.vaults = vaults
     },
     setActiveVault(state, vaultId) {
       state.activeVault = state.vaults.find(v => v.id == vaultId)
     },
-    setVaultKeeps(state, keeps){
+    setVaultKeeps(state, keeps) {
       state.vaultKeeps = keeps
     }
   },
 
   actions: {
     //Vault Keep -----------------------------------------------------------------
-    addToVault({ dispatch, commit}, payload) {
+    addToVault({ dispatch, commit }, payload) {
       var newvk = {}
       newvk.keepId = payload.keep.id
       newvk.vaultId = payload.vault.id
@@ -99,6 +103,7 @@ export default new vuex.Store({
       api.post('/keeps', newKeep)
     },
     setKeep({ commit }, keep) {
+      api.put('/keeps/' + keep.id, keep)
       commit("setKeep", keep)
     },
 
@@ -107,6 +112,11 @@ export default new vuex.Store({
         .then(res => {
           commit('setKeeps', res.data)
         })
+    },
+    getMyKeeps({ commit }) {
+      api.get('keeps/mykeeps').then(res => {
+        commit('setMyKeeps', res.data)
+      })
     },
     getKeepId({ commit, dispatch, state }) {
       api.get('/keeps/' + state.currentKeep.Id)

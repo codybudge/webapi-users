@@ -6,6 +6,7 @@ import Keeps from '@/components/Keeps'
 import SeeKeep from '@/components/SeeKeep'
 import Vault from '@/components/Vault'
 import ViewVault from '@/components/ViewVault'
+import KeepDetails from '@/components/KeepDetails'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,12 @@ export default new Router({
       props: true,
       component: ViewVault
     },
+    {
+      path: '/KeepDetails/:keepId',
+      name: 'KeepDetails',
+      props: true,
+      component: KeepDetails
+    }
 
     
   ]

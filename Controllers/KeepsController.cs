@@ -26,6 +26,13 @@ namespace API_Users.Controllers
       return db.GetAll();
     }
 
+    [HttpGet("mykeeps")]
+    public IEnumerable<Keeps> GetUserKeeps()
+    {
+      var userId = HttpContext.User.Identity.Name;
+      return db.GetUserKeeps(userId);
+    }
+
     //GET api/Keeps/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpGet("{id}")]
     public Keeps Get(int id)
@@ -49,8 +56,10 @@ namespace API_Users.Controllers
 
     //PUT api/Keeps/192bd9837s9_12389x129x38 _273bxb19x36
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody]string value)
+    public string Put(int id, [FromBody]Keeps keep)
     {
+      db.EditKeep(keep);
+      return "Updated";
     }
 
     //DELETE api/Keeps/192bd9837s9_12389x129x38 _273bxb19x36
