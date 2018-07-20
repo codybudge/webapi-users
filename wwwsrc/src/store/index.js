@@ -27,7 +27,8 @@ export default new vuex.Store({
     keeps: [],
     vaults: [],
     currentKeep: {},
-    activeVault: {}
+    activeVault: {},
+    vaultKeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -43,32 +44,26 @@ export default new vuex.Store({
       state.vaults = vaults
     },
     setActiveVault(state, vaultId) {
-      debugger
-      state.activeVault = state.vaults.find(v=> v.id == vaultId)
+      state.activeVault = state.vaults.find(v => v.id == vaultId)
+    },
+    setVaultKeeps(state, keeps){
+      state.vaultKeeps = keeps
     }
   },
 
   actions: {
     //Vault Keep -----------------------------------------------------------------
-    addToVault({ dispatch, commit, state }, vault) {
+    addToVault({ dispatch, commit}, payload) {
       var newvk = {}
-      newvk.userId = state.currentUser.id
-      newvk.keepId = state.currentKeep.id
-      newvk.vaultId = vault.id
+      newvk.keepId = payload.keep.id
+      newvk.vaultId = payload.vault.id
       console.log(newvk)
       api.post('/vaultkeeps', newvk)
-        .then(res => {
-          console.log(res)
-          var newKeep = state.currentKeep
-          newKeep.saves = state.currentKeep.saves + 1
-          dispatch('editKeep', newKeep)
-        })
     },
-    getVaultKeeps({ dispatch, commit, state }) {
-      api.get('/vaultkeeps/vault/' + state.activeVault.id)
+    getVaultKeeps({ dispatch, commit }, id) {
+      api.get('/vaultkeeps/' + id)
         .then(res => {
-          console.log('res')
-          dispatch('getKeepsFromVault', res.data)
+          commit("setVaultKeeps", res.data)
         })
     },
     //Vault -----------------------------------------------------------------
@@ -76,53 +71,42 @@ export default new vuex.Store({
       newVault.UserId = state.currentUser.id
       newVault.Username = state.currentUser.username
       api.post('/vault', newVault)
+    },
+    getVaults({ dispatch, commit, }) {
+      api.get('/vault')
         .then(res => {
-          //state.currentVault = res.data
-          //router.push({name: "ViewVault"})
+          commit('setVaults', res.data)
+          console.log(res.data)
         })
     },
-    getVaults({ dispatch, commit, }){
-      api.get('/vault')
-      .then(res => {
-        commit('setVaults', res.data)
-        console.log(res.data)
-      })
-    },
     setActiveVault({ commit }, vaultId) {
-      debugger
       commit('setActiveVault', vaultId)
     },
 
     //Keeps -----------------------------------------------------------------
-    createKeep({commit, dispatch, state}, payload){ 
+    createKeep({ commit, dispatch, state }, payload) {
       payload.userId = state.currentUser.id
       payload.Username = state.currentUser.username
       api.post('/keeps', payload)
-      .then(res => {
-        dispatch('getAllKeeps')
-      })
-      
+        .then(res => {
+          dispatch('getAllKeeps')
+        })
+
     },
     addNewKeep({ dispatch, commit, state }, newKeep) {
       newKeep.UserId = state.currentUser.id
       newKeep.Username = state.currentUser.username
       api.post('/keeps', newKeep)
-        .then(res => {
-          //state.currentKeep = res.data
-          //router.push({name: "ViewKeep"})
-          
-        })
     },
     setKeep({ commit }, keep) {
-      debugger
       commit("setKeep", keep)
     },
-    
+
     getAllKeeps({ commit, dispatch }) {
       api.get('/keeps')
-      .then(res => {
-        commit('setKeeps', res.data)
-      })
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
     },
     getKeepId({ commit, dispatch, state }) {
       api.get('/keeps/' + state.currentKeep.Id)
@@ -143,11 +127,11 @@ export default new vuex.Store({
           console.log(res)
         })
     },
-    logout({dispatch, commit,state}){
+    logout({ dispatch, commit, state }) {
       auth.delete('/' + state.currentUser.id)
-      .then(res =>{
-        console.log(res)
-      })
+        .then(res => {
+          console.log(res)
+        })
     },
 
     register({ commit, dispatch }, payload) {

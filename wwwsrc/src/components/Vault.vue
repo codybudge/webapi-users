@@ -8,7 +8,7 @@
         <div v-if="currentUser.id">
           <form @submit.prevent="addNewVault">
             <input type="text" placeholder="Title" v-model="newVault.name">
-            <input type="text" placeholder="description" v-model="newVault.Description">
+            <input type="text" placeholder="Description" v-model="newVault.Description">
             <button class="btn" type="submit">Submit</button>
           </form>
           <div v-for="vault in vaults">
