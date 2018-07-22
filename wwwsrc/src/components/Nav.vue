@@ -37,4 +37,7 @@
   </script>
   
   <style>
+    .navbar{
+      background-color: rgb(119, 119, 119);
+    }
   </style>
