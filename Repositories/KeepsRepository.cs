@@ -22,7 +22,7 @@ namespace API_Users.Repositories
 
     public Keeps GetById(int id)
     {
-      return _db.Query<Keeps>("Select * FROM keeps WHERE id=@id", new { id }).FirstOrDefault();
+      return _db.Query<Keeps>("SELECT * FROM keeps WHERE id = @id", new { id }).FirstOrDefault();
     }
 
     public Keeps AddKeeps(Keeps newKeeps)
