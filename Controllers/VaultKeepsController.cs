@@ -17,8 +17,6 @@ namespace API_Users.Controllers
     {
       _db = repo;
     }
-
-    //Create new VaultKeep? maybe just a keep?
     [HttpPost]
     public VaultKeep CreateVaultKeep([FromBody]VaultKeep newVaultKeep)
     {

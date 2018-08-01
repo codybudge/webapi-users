@@ -11,7 +11,7 @@ using API_Users.Repositories;
 namespace API_Users.Controllers
 {
     [Route("api/[controller]")]
-  public class VaultController: Controller
+  public class VaultController : Controller
   {
     private readonly VaultRepository db;
     public VaultController(VaultRepository repo)
