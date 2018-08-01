@@ -17,7 +17,7 @@ namespace API_Users.Repositories
     }
     public IEnumerable<Vault> GetAll(string id)
     {
-      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = @id", new {id});
+      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = @id", new { id });
     }
 
     public  Vault GetById(string id)
