@@ -10,7 +10,7 @@ namespace API_Users.Repositories
   public class VaultRepository
   {
     private readonly IDbConnection _db;
-    
+
     public VaultRepository(IDbConnection db)
     {
       _db = db;
@@ -20,20 +20,19 @@ namespace API_Users.Repositories
       return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = @id", new { id });
     }
 
-    public  Vault GetById(string id)
+    public Vault GetById(string id)
     {
-      return _db.Query<Vault>("Select * FROM vaults WHERE id=@id", new{id}).FirstOrDefault();
-      }
+      return _db.Query<Vault>("SELECT * FROM vaults WHERE id=@id", new { id }).FirstOrDefault();
+    }
 
-      public Vault AddVault(Vault newVault)
-      {
-        _db.ExecuteScalar<string>(@"
+    public Vault AddVault(Vault newVault)
+    {
+      _db.ExecuteScalar<string>(@"
         INSERT INTO vaults (name, description, userId)
         VALUES(@Name, @Description, @userId);
          SELECT LAST_INSERT_ID()", newVault);
 
-        return newVault;
-      }
+      return newVault;
     }
-
+  }
 }
