@@ -10,8 +10,8 @@
           All Posts
         </router-link>
         <div v-if="User.id">
+          <button class="btn" @click="logout">Logout</button>
         </div>
-        <button class="btn" @click="logout">Logout</button>
       </nav>
     </div>
   </template>

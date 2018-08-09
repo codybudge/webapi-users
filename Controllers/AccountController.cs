@@ -52,14 +52,15 @@ namespace API_Users.Controllers
             return null;
         }
         [HttpGet("authenticate")]
-        public UserReturnModel Authenticate()
-        {
-            var user = HttpContext.User;
-            var id = user.Identity.Name;
-            // var email = user.Claims.Where(c => c.Type == ClaimTypes.Email)
-            //        .Select(c => c.Value).SingleOrDefault();
-            return _db.GetUserById(id);
-        }
+    public UserReturnModel Authenticate()
+    {
+      var user = HttpContext.User;
+      var id = user.Identity.Name;
+      if(id == null) {
+        return null;
+      }
+      return _db.GetUserById(id);
+    }
 
         [Authorize]
         [HttpPut]
