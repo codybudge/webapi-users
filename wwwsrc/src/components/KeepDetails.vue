@@ -1,5 +1,4 @@
 <template>
-  <div class="">
     <div class="card" style="width: 18rem;">
       <h3 class="card-title">{{keep.name}}</h3>
       <img class="card-img-top" :src="keep.url" alt="Card image">
@@ -10,7 +9,6 @@
         <a href="#" @click="setKeep(keep)">View Keep</a>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

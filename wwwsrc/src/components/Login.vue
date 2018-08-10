@@ -7,7 +7,7 @@
               <div v-if="logister">
                 <h1>This is the Login Page</h1>
                 <form @submit.prevent="userLogin">
-                  <input type="text" name="email" id="email" v-model="login.email" placeholder="email" required>
+                  <input type="email" name="email" id="email" v-model="login.email" placeholder="email" required>
                   <input type="password" name="password" id="password" v-model="login.password" placeholder="password" required>
                   <button class="btn" type="submit">Login</button>
                 </form>
@@ -21,7 +21,8 @@
                 <input type="password" name="password" id="password" v-model="register.password" placeholder='password' require>
                 <button class="btn" type="submit">Register</button>
               </form>
-              <button class="btn" type="" @click="regLog">Login</button>
+              <button class="btn" type="" @click="regLog">Login
+              </button>
             </div>
           </div>
         </div>
@@ -44,7 +45,6 @@
          username: '',
          password: '',
        }
-       
       }
     },
     computed: {
