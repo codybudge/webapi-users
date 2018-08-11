@@ -8,7 +8,7 @@
         <div v-if="currentUser.id">
           <form @submit.prevent="addNewVault">
             <input type="text" placeholder="Title" v-model="newVault.name">
-            <input type="text" placeholder="Description" v-model="newVault.Description">
+            <input type="text" placeholder="Description" v-model="newVault.description">
             <button class="btn" type="submit">Submit</button>
           </form>
           <div v-for="vault in vaults">
@@ -40,9 +40,6 @@
         }
       }
     },
-    // created() {
-    //   this.$store.dispatch('getVaults')
-    // },
     computed: {
       vaults() {
         return this.$store.state.vaults
