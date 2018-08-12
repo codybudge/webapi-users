@@ -19,10 +19,8 @@
               add to Vault: {{vault.name}}
             </button>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </template>
