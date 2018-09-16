@@ -2,7 +2,7 @@
     <div class="Nav container-fluid">
       <nav class="navbar sticky-top navbar-light bg-light">
         <h2>Keepr</h2>
-        <h3>Hello {{User.username}}</h3>
+        <h3>Welcome {{User.username}}</h3>
         <router-link :to="{name:'Home'}">
           Home
         </router-link>
