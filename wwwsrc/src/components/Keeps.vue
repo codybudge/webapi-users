@@ -72,7 +72,11 @@
       }
     }
   }
+
 </script>
 
-<style>
+<style scoped>
+  .card-body {
+    background: rgb(89, 148, 195);
+  }
 </style>

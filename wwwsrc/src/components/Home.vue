@@ -41,4 +41,11 @@
   </script>
   
   <style scoped>
+    .nav {
+      background: rgb(100, 100, 100);
+      
+    }
+    form {
+      background-color: rgb(175, 9, 112);
+    }
   </style>
